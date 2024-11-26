@@ -1,0 +1,41 @@
+<h3><center>Employees Portal</center></h3>
+
+<center>
+  <%= link_to 'New Employee', new_employee_path, class: 'btn btn-info btn-sm' %>
+</center>
+
+<table class="table">
+  <thead>
+    <tr>
+    <th scope="col">Employee ID</th>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Hobbies</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each_with_index do |employee, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= employee.employee_name %></td>
+        <td><%= employee.gender  %></td>
+        <td><%= employee.hobbies %></td>
+        <td>
+          <div class="employe_table" style="display: flex; align-items: center;">
+            <%= link_to 'Show', employee_path(employee), class: 'btn btn-info btn-sm' %> |
+            <%= link_to 'Edit', edit_employee_path(employee), class: 'btn btn-warning btn-sm' %> |
+            <!-- Delete button, using a form for DELETE method -->
+            <%= button_to 'Delete', employee_path(employee), 
+            method: :delete, 
+            class: 'btn btn-danger btn-sm', 
+            data: { confirm: 'Are you sure you want to delete this employee?' } %>
+          </div>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

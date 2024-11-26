@@ -1,0 +1,38 @@
+<h1><%= @employee.new_record? ? 'New Employee' : 'Edit Employee' %></h1>
+
+<%= form_with(model: @employee, local: true) do |form| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Employee Name Field -->
+  <div class="mb-3 row">
+    <%= form.label :employee_name, class: "form-label" %>
+    <%= form.text_field :employee_name, class: "form-control", placeholder: "Enter employee name" %>
+  </div>
+
+  <!-- Gender Field -->
+  <div class="mb-3">
+    <%= form.label :gender, class: "form-label" %>
+    <%= form.select :gender, ['Male', 'Female', 'Other'], { prompt: 'Select gender' }, class: "form-select" %>
+  </div>
+
+  <!-- Hobbies Field -->
+  <div class="mb-3">
+    <%= form.label :hobbies, class: "form-label" %>
+    <%= form.text_area :hobbies, class: "form-control", rows: 3, placeholder: "Enter hobbies" %>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="mb-3">
+    <%= form.submit 'Save Employee', class: "btn btn-primary" %>
+  </div>
+
+<% end %>
